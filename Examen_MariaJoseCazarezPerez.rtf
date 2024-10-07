@@ -1,0 +1,179 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2759
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red255\green255\blue255;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c100000\c100000\c99985;}
+\margl1440\margr1440\vieww29200\viewh16000\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs26 \cf2 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec3 \{\
+ "cells": [\
+  \{\
+   "cell_type": "markdown",\
+   "id": "195bbe91-cb9d-43a5-8d3f-166c3470ff77",\
+   "metadata": \{\},\
+   "source": [\
+    "# Teor\'eda"\
+   ]\
+  \},\
+  \{\
+   "cell_type": "markdown",\
+   "id": "d802c14e-94ea-47d3-a083-16784950bef3",\
+   "metadata": \{\},\
+   "source": [\
+    "1. En el comando:\\n",\
+    "\\n",\
+    "```bash\\n",\
+    "git commit -m \\"mensaje\\"\\n",\
+    "```\\n",\
+    "\\n",\
+    "\'bfPara qu\'e9 sirve la bandera `-m`?\\n",\
+    "\\n",\
+    "Respuesta: b)\\n"\
+   ]\
+  \},\
+  \{\
+   "cell_type": "markdown",\
+   "id": "99010158-7bbb-4a1c-a622-0a14050a2351",\
+   "metadata": \{\},\
+   "source": [\
+    "2. \'bfEn qu\'e9 casos se usan la 4ta y 5ta forma normal?\\n",\
+    "\\n",\
+    "Respuesta: a)\\n"\
+   ]\
+  \},\
+  \{\
+   "cell_type": "markdown",\
+   "id": "56725b26-ca0d-435b-aade-10d8bff371cf",\
+   "metadata": \{\},\
+   "source": [\
+    "3. \'bfEn qu\'e9 forma normal se eliminan los grupos repetidos?\\n",\
+    "\\n",\
+    "Respuesta: En la primera forma normal\\n"\
+   ]\
+  \},\
+  \{\
+   "cell_type": "markdown",\
+   "id": "d96653f1-7a3d-4eaf-9851-50da64449b76",\
+   "metadata": \{\},\
+   "source": [\
+    "4. Explica la diferencia entre la cl\'e1usula `WHERE` y la cl\'e1usula `HAVING`.\\n",\
+    "\\n",\
+    "Respuesta: Los dos hacen filtro, sin embargo `HAVING` lo ejecuta sobre grupos despu\'e9s del `GROUP BY`.\\n"\
+   ]\
+  \},\
+  \{\
+   "cell_type": "markdown",\
+   "id": "90617bea-c6a2-4b0a-a995-ea005edb6c1f",\
+   "metadata": \{\},\
+   "source": [\
+    "5. Dado el siguiente query:\\n",\
+    "\\n",\
+    "```sql\\n",\
+    "SELECT nombre, apellido, COUNT(*) as total_materias\\n",\
+    "FROM alumnos\\n",\
+    "INNER JOIN calificaciones ON alumnos.expediente = calificaciones.expediente\\n",\
+    "GROUP BY nombre, apellido;\\n",\
+    "```\\n",\
+    "\\n",\
+    "Respuesta: c)\\n"\
+   ]\
+  \},\
+  \{\
+   "cell_type": "markdown",\
+   "id": "7ddea64f-006e-45d2-9bf5-a21346ad475f",\
+   "metadata": \{\},\
+   "source": [\
+    "# Pr\'e1ctica"\
+   ]\
+  \},\
+  \{\
+   "cell_type": "markdown",\
+   "id": "7111d84a-03f5-457c-8a03-c8235377ea3f",\
+   "metadata": \{\},\
+   "source": [\
+    "1. Escribe un query para obtener el promedio de calificaciones por cada materia en la tabla calificaciones. Incluye solo aquellas materias que tienen al menos una calificaci\'f3n registrada. Ordena del mejor promedio al peor promedio.\\n",\
+    "\\n",\
+    "```sql\\n",\
+    "SELECT \\n",\
+    "    nombre_materia,\\n",\
+    "    AVG(calificacion) AS promedio_calificacion\\n",\
+    "FROM\\n",\
+    "    calificaciones\\n",\
+    "WHERE\\n",\
+    "    calificacion IS NOT NULL\\n",\
+    "GROUP BY\\n",\
+    "    nombre_materia\\n",\
+    "ORDER BY\\n",\
+    "    promedio_calificacion DESC;\\n",\
+    "```\\n"\
+   ]\
+  \},\
+  \{\
+   "cell_type": "markdown",\
+   "id": "0509fcd0-4ada-42c2-9264-f3ddac5ea5bd",\
+   "metadata": \{\},\
+   "source": [\
+    "2. Escribe un query que muestre el nombre y apellido de los alumnos que tienen al menos una calificaci\'f3n registrada. Ordena el resultado por apellido.\\n",\
+    "\\n",\
+    "```sql\\n",\
+    "SELECT\\n",\
+    "    DISTINCT a.nombre,\\n",\
+    "    a.apellido\\n",\
+    "FROM\\n",\
+    "    alumnos AS a\\n",\
+    "INNER JOIN\\n",\
+    "    calificaciones AS c\\n",\
+    "USING(expediente)\\n",\
+    "ORDER BY\\n",\
+    "    a.apellido;\\n",\
+    "```\\n"\
+   ]\
+  \},\
+  \{\
+   "cell_type": "markdown",\
+   "id": "616fc824-19b4-4827-89cf-1e6426f11a19",\
+   "metadata": \{\},\
+   "source": [\
+    "3. Escribe una consulta que muestre el nombre, apellido y calificaci\'f3n m\'e1xima de cada alumno. Considera solo las materias en las que el alumno ha recibido calificaci\'f3n.\\n",\
+    "\\n",\
+    "```sql\\n",\
+    "SELECT \\n",\
+    "    a.nombre,\\n",\
+    "    a.apellido,\\n",\
+    "    MAX(c.calificacion) AS calificacion_maxima\\n",\
+    "FROM \\n",\
+    "    alumnos a\\n",\
+    "INNER JOIN calificaciones c ON a.expediente = c.expediente\\n",\
+    "WHERE \\n",\
+    "    c.calificacion IS NOT NULL\\n",\
+    "GROUP BY \\n",\
+    "    a.expediente, a.nombre, a.apellido;\\n",\
+    "```\\n"\
+   ]\
+  \}\
+ ],\
+ "metadata": \{\
+  "kernelspec": \{\
+   "display_name": "Python 3 (ipykernel)",\
+   "language": "python",\
+   "name": "python3"\
+  \},\
+  "language_info": \{\
+   "codemirror_mode": \{\
+    "name": "ipython",\
+    "version": 3\
+   \},\
+   "file_extension": ".py",\
+   "mimetype": "text/x-python",\
+   "name": "python",\
+   "nbconvert_exporter": "python",\
+   "pygments_lexer": "ipython3",\
+   "version": "3.9.13"\
+  \}\
+ \},\
+ "nbformat": 4,\
+ "nbformat_minor": 5\
+\}\
+}
